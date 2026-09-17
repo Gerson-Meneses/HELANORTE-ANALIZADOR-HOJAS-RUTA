@@ -1,0 +1,251 @@
+.vista {
+  padding-bottom: var(--espacio-6);
+}
+
+.noEncontrado {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--espacio-3);
+  padding: var(--espacio-6) var(--espacio-4);
+}
+
+.contenido {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-5);
+  padding: 0 var(--espacio-4);
+}
+
+.navegacionRapida {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espacio-3);
+  padding: 0 var(--espacio-4) var(--espacio-4);
+}
+
+.navegacionRapida button {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radius-md);
+  background-color: var(--color-superficie);
+  color: var(--color-texto);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.navegacionRapida button:disabled {
+  opacity: 0.4;
+}
+
+.posicion {
+  flex-shrink: 0;
+  font-size: 0.75rem;
+  color: var(--color-texto-tenue);
+  white-space: nowrap;
+}
+
+.encabezadoTarjeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.botonEditar {
+  background: none;
+  border: none;
+  color: var(--color-primario);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.camposEdicion {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--espacio-3);
+}
+
+@media (min-width: 480px) {
+  .camposEdicion {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.campoEdicion {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.78rem;
+  color: var(--color-texto-tenue);
+}
+
+.campoEdicion input {
+  padding: 8px 10px;
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  font-size: 0.9rem;
+}
+
+.accionesEdicion {
+  display: flex;
+  gap: var(--espacio-3);
+}
+
+.accionesEdicion > * {
+  flex: 1;
+}
+
+.botonEliminar {
+  width: 100%;
+  margin-top: var(--espacio-2);
+}
+
+.botonGuardarRuta {
+  margin-top: var(--espacio-3);
+  width: 100%;
+}
+
+.tarjetaInfo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-3);
+  background-color: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radius-lg);
+  padding: var(--espacio-4);
+}
+
+.datos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--espacio-3);
+  margin: 0;
+}
+
+.datos dt {
+  font-size: 0.72rem;
+  color: var(--color-texto-tenue);
+}
+
+.datos dd {
+  margin: 2px 0 0;
+  font-size: 0.9rem;
+}
+
+.datoAncho {
+  grid-column: 1 / -1;
+}
+
+.bloqueEquipos {
+  padding-top: var(--espacio-2);
+  border-top: 1px solid var(--color-borde);
+}
+
+.etiquetaBloque {
+  font-size: 0.72rem;
+  color: var(--color-texto-tenue);
+}
+
+.sinEquipo {
+  margin-top: 4px;
+  font-size: 0.85rem;
+  color: var(--color-texto-tenue);
+}
+
+.listaEquipos {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.listaEquipos li {
+  font-size: 0.88rem;
+}
+
+.detalleCrudo {
+  border-top: 1px solid var(--color-borde);
+  padding-top: var(--espacio-2);
+}
+
+.detalleCrudo summary {
+  font-size: 0.8rem;
+  color: var(--color-primario);
+  cursor: pointer;
+}
+
+.pre {
+  margin-top: var(--espacio-2);
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-size: 0.75rem;
+  background-color: var(--color-superficie-2);
+  padding: var(--espacio-2);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.enlaceMapa {
+  font-size: 0.85rem;
+  color: var(--color-primario);
+}
+
+.tituloSeccion {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: var(--espacio-2);
+}
+
+.fechaUltimoPunto {
+  font-size: 0.78rem;
+  color: var(--color-texto-tenue);
+  margin-top: var(--espacio-1);
+}
+
+.textarea {
+  width: 100%;
+  padding: var(--espacio-3);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radius-md);
+  background-color: var(--color-superficie);
+  color: var(--color-texto);
+  font-family: inherit;
+  font-size: 0.9rem;
+  resize: vertical;
+}
+
+.togglePersonalizar {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--color-primario);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.personalizar {
+  margin-top: var(--espacio-3);
+}
+
+.ayudaPersonalizar {
+  font-size: 0.82rem;
+  color: var(--color-texto-tenue);
+  margin-bottom: var(--espacio-3);
+}
+
+.quitarOverride {
+  background: none;
+  border: none;
+  color: var(--color-primario);
+  font-size: 0.78rem;
+  margin: -8px 0 var(--espacio-3);
+  padding: 0 var(--espacio-4);
+}

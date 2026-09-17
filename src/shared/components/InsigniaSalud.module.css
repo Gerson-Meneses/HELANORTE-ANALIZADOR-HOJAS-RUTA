@@ -1,0 +1,33 @@
+.insignia {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espacio-1);
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.punto {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: currentColor;
+}
+
+.bueno {
+  color: var(--nivel-bueno);
+  background-color: var(--nivel-bueno-fondo);
+}
+.regular {
+  color: var(--nivel-regular);
+  background-color: var(--nivel-regular-fondo);
+}
+.malo {
+  color: var(--nivel-malo);
+  background-color: var(--nivel-malo-fondo);
+}
+.sin_datos {
+  color: var(--nivel-sin-datos);
+  background-color: var(--nivel-sin-datos-fondo);
+}

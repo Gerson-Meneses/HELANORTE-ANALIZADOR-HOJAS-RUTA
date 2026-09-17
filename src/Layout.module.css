@@ -1,0 +1,13 @@
+.layout {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.contenido {
+  flex: 1;
+  max-width: 640px;
+  width: 100%;
+  margin: 0 auto;
+  padding-bottom: 76px; /* deja espacio para la barra inferior fija */
+}

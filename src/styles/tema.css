@@ -1,0 +1,75 @@
+/*
+ * Sistema de tokens de color. El tema oscuro usa negro puro (#000000)
+ * porque está pensado para pantallas AMOLED: en esas pantallas el negro
+ * puro apaga por completo esos píxeles, ahorrando batería — importante
+ * para un vendedor que usa esto todo el día en la calle.
+ */
+
+:root {
+  --font-sans: 'IBM Plex Sans', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', 'SFMono-Regular', monospace;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+
+  --espacio-1: 4px;
+  --espacio-2: 8px;
+  --espacio-3: 12px;
+  --espacio-4: 16px;
+  --espacio-5: 24px;
+  --espacio-6: 32px;
+
+  --nivel-bueno: #16a34a;
+  --nivel-bueno-fondo: rgba(22, 163, 74, 0.12);
+  --nivel-regular: #d97706;
+  --nivel-regular-fondo: rgba(217, 119, 6, 0.14);
+  --nivel-malo: #dc2626;
+  --nivel-malo-fondo: rgba(220, 38, 38, 0.12);
+  --nivel-sin-datos: #6b7280;
+  --nivel-sin-datos-fondo: rgba(107, 114, 128, 0.12);
+
+  --duracion-transicion: 160ms;
+}
+
+[data-tema='claro'] {
+  --color-fondo: #f5fafb;
+  --color-superficie: #ffffff;
+  --color-superficie-2: #eaf4f5;
+  --color-borde: #d7e7ea;
+
+  --color-texto: #0b1214;
+  --color-texto-tenue: #55686d;
+  --color-texto-inverso: #f5fafb;
+
+  --color-primario: #0891b2;
+  --color-primario-fuerte: #0e7490;
+  --color-primario-tenue: rgba(8, 145, 178, 0.1);
+
+  --sombra-1: 0 1px 3px rgba(11, 18, 20, 0.08);
+}
+
+[data-tema='oscuro'] {
+  --color-fondo: #000000;
+  --color-superficie: #0b1214;
+  --color-superficie-2: #121b1e;
+  --color-borde: #1e2b2e;
+
+  --color-texto: #e6f1f3;
+  --color-texto-tenue: #8fa4a9;
+  --color-texto-inverso: #04141a;
+
+  --color-primario: #22d3ee;
+  --color-primario-fuerte: #67e8f9;
+  --color-primario-tenue: rgba(34, 211, 238, 0.14);
+
+  /* Ajustar niveles para que resalten sobre negro puro */
+  --nivel-bueno: #34d399;
+  --nivel-bueno-fondo: rgba(52, 211, 153, 0.14);
+  --nivel-regular: #fbbf24;
+  --nivel-regular-fondo: rgba(251, 191, 36, 0.16);
+  --nivel-malo: #f87171;
+  --nivel-malo-fondo: rgba(248, 113, 113, 0.14);
+
+  --sombra-1: 0 1px 3px rgba(0, 0, 0, 0.6);
+}

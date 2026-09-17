@@ -1,0 +1,23 @@
+.contenedor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--espacio-3);
+  padding: var(--espacio-6) var(--espacio-5);
+  text-align: center;
+}
+
+.icono {
+  font-size: 3rem;
+}
+
+.titulo {
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.descripcion {
+  color: var(--color-texto-tenue);
+  font-size: 0.9rem;
+  max-width: 320px;
+}

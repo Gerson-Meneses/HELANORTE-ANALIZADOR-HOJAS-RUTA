@@ -1,0 +1,65 @@
+.tarjeta {
+  background-color: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radius-md);
+  padding: var(--espacio-3) var(--espacio-4);
+  margin-bottom: var(--espacio-3);
+}
+
+.encabezado {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--espacio-3);
+}
+
+.nombre {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.descripcion {
+  color: var(--color-texto-tenue);
+  font-size: 0.8rem;
+  margin-top: 2px;
+}
+
+.switch {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  color: var(--color-texto-tenue);
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.campos {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-3);
+  margin-top: var(--espacio-3);
+  padding-top: var(--espacio-3);
+  border-top: 1px solid var(--color-borde);
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.82rem;
+  color: var(--color-texto-tenue);
+}
+
+.campo input[type='number'] {
+  padding: 8px 10px;
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  font-size: 0.95rem;
+}
+
+.campo input[type='range'] {
+  accent-color: var(--color-primario);
+}

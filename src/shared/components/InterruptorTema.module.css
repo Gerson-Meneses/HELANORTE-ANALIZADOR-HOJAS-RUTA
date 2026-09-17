@@ -1,0 +1,16 @@
+.interruptor {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--color-borde);
+  background-color: var(--color-superficie-2);
+  color: var(--color-texto);
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.interruptor:hover {
+  border-color: var(--color-primario);
+}

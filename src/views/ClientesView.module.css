@@ -1,0 +1,35 @@
+.grupo {
+  margin-bottom: var(--espacio-4);
+}
+
+.selectorRuta {
+  padding: 0 var(--espacio-4) var(--espacio-3);
+}
+
+.selectorRuta select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radius-md);
+  background-color: var(--color-superficie);
+  color: var(--color-texto);
+  font-size: 0.9rem;
+  min-height: 44px;
+}
+
+.tituloGrupo {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-2);
+  padding: 0 var(--espacio-4) var(--espacio-2);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-texto-tenue);
+}
+
+.contadorGrupo {
+  background-color: var(--color-superficie-2);
+  border-radius: 999px;
+  padding: 1px 8px;
+  font-size: 0.75rem;
+}

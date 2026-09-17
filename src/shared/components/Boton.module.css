@@ -1,0 +1,74 @@
+.boton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--espacio-2);
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: background-color var(--duracion-transicion) ease,
+    border-color var(--duracion-transicion) ease,
+    transform 80ms ease;
+  white-space: nowrap;
+}
+
+.boton:active {
+  transform: scale(0.98);
+}
+
+.boton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.md {
+  padding: 10px 16px;
+  min-height: 44px; /* objetivo táctil cómodo para uso con el pulgar */
+}
+
+.lg {
+  padding: 14px 20px;
+  min-height: 52px;
+  font-size: 1.05rem;
+}
+
+.primario {
+  background-color: var(--color-primario);
+  color: var(--color-texto-inverso);
+}
+.primario:hover {
+  background-color: var(--color-primario-fuerte);
+}
+
+.secundario {
+  background-color: var(--color-superficie-2);
+  color: var(--color-texto);
+  border-color: var(--color-borde);
+}
+.secundario:hover {
+  border-color: var(--color-primario);
+}
+
+.fantasma {
+  background-color: transparent;
+  color: var(--color-primario);
+}
+.fantasma:hover {
+  background-color: var(--color-primario-tenue);
+}
+
+.peligro {
+  background-color: transparent;
+  color: var(--nivel-malo);
+  border-color: var(--nivel-malo);
+}
+.peligro:hover {
+  background-color: var(--nivel-malo-fondo);
+}
+
+.icono {
+  display: inline-flex;
+  align-items: center;
+}

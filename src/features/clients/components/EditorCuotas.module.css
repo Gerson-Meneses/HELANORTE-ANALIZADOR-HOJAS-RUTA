@@ -1,0 +1,51 @@
+.contenedor {
+  background-color: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radius-md);
+  padding: var(--espacio-3) var(--espacio-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-2);
+}
+
+.mesActual {
+  font-size: 0.78rem;
+  color: var(--color-texto-tenue);
+  text-transform: capitalize;
+}
+
+.fila {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espacio-3);
+}
+
+.etiquetaFila {
+  font-size: 0.88rem;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fila input {
+  width: 110px;
+  flex-shrink: 0;
+  padding: 8px 10px;
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  font-size: 0.9rem;
+  text-align: right;
+}
+
+.resumen {
+  margin-top: var(--espacio-1);
+  padding-top: var(--espacio-2);
+  border-top: 1px solid var(--color-borde);
+  font-size: 0.85rem;
+  color: var(--color-texto-tenue);
+}

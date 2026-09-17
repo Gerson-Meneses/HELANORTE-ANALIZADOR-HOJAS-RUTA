@@ -1,0 +1,52 @@
+.contenedor {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-2);
+}
+
+.etiqueta {
+  font-size: 0.78rem;
+  color: var(--color-texto-tenue);
+}
+
+.fila {
+  display: flex;
+  gap: var(--espacio-2);
+}
+
+.fila input {
+  padding: 8px 10px;
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  font-size: 0.88rem;
+  min-width: 0;
+}
+
+.fila input:first-child {
+  flex: 0 0 40%;
+}
+
+.fila input:nth-child(2) {
+  flex: 1;
+}
+
+.fila button {
+  flex-shrink: 0;
+  width: 36px;
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radius-sm);
+  background-color: transparent;
+  color: var(--nivel-malo);
+}
+
+.agregar {
+  align-self: flex-start;
+  background: none;
+  border: none;
+  color: var(--color-primario);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 4px 0;
+}

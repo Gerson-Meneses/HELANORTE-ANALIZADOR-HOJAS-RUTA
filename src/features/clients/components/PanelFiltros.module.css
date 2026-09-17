@@ -1,0 +1,54 @@
+.contenedor {
+  margin: 0 var(--espacio-4) var(--espacio-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-2);
+}
+
+.encabezado {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.titulo {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-texto-tenue);
+}
+
+.limpiarTodo {
+  background: none;
+  border: none;
+  color: var(--color-primario);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.grilla {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--espacio-2);
+}
+
+.checkboxCongelador {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--color-texto);
+  background-color: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radius-md);
+  padding: 10px 12px;
+  min-height: 44px;
+}
+
+.selectCongelador {
+  border: none;
+  background: none;
+  color: var(--color-primario);
+  font-size: 0.85rem;
+  font-weight: 600;
+}

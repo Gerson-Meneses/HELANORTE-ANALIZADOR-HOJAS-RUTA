@@ -1,0 +1,51 @@
+.enlace {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  margin: 0 var(--espacio-4) var(--espacio-3);
+}
+
+.tarjeta {
+  margin: 0;
+}
+
+.encabezadoTarjeta {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--espacio-2);
+}
+
+.nombre {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.codigo {
+  color: var(--color-texto-tenue);
+  font-size: 0.8rem;
+  margin-top: 2px;
+}
+
+.datos {
+  display: flex;
+  gap: var(--espacio-5);
+  margin-top: var(--espacio-3);
+}
+
+.datos > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.etiquetaDato {
+  font-size: 0.72rem;
+  color: var(--color-texto-tenue);
+}
+
+.negocio {
+  margin-top: var(--espacio-2);
+  font-size: 0.78rem;
+  color: var(--color-texto-tenue);
+}

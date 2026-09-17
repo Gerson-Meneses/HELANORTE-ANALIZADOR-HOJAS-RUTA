@@ -1,0 +1,44 @@
+.vista {
+  padding-bottom: 88px; /* espacio para la barra inferior fija */
+}
+
+.vacio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--espacio-4);
+  padding: var(--espacio-6) var(--espacio-4);
+  text-align: center;
+  color: var(--color-texto-tenue);
+}
+
+.avisoGeneral {
+  margin: 0 var(--espacio-4) var(--espacio-3);
+  padding: var(--espacio-3);
+  background-color: var(--nivel-regular-fondo);
+  color: var(--nivel-regular);
+  border-radius: var(--radius-md);
+  font-size: 0.88rem;
+}
+
+.lista {
+  display: flex;
+  flex-direction: column;
+}
+
+.barraInferior {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  gap: var(--espacio-3);
+  padding: var(--espacio-3) var(--espacio-4);
+  padding-bottom: calc(var(--espacio-3) + env(safe-area-inset-bottom, 0));
+  background-color: var(--color-superficie);
+  border-top: 1px solid var(--color-borde);
+}
+
+.barraInferior > * {
+  flex: 1;
+}

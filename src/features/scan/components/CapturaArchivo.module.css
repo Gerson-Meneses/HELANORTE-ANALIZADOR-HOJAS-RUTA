@@ -1,0 +1,58 @@
+.contenedor {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-4);
+  padding: var(--espacio-4);
+}
+
+.zonaCamara {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--espacio-2);
+  padding: var(--espacio-6) var(--espacio-4);
+  border: 2px dashed var(--color-borde);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-superficie);
+  text-align: center;
+}
+
+.zonaCamara:hover {
+  border-color: var(--color-primario);
+  background-color: var(--color-primario-tenue);
+}
+
+.iconoGrande {
+  font-size: 2.5rem;
+}
+
+.textoAccion {
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.textoAyuda {
+  color: var(--color-texto-tenue);
+  font-size: 0.85rem;
+  max-width: 260px;
+}
+
+.inputOculto {
+  display: none;
+}
+
+.separador {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-3);
+  color: var(--color-texto-tenue);
+  font-size: 0.85rem;
+}
+
+.separador::before,
+.separador::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background-color: var(--color-borde);
+}

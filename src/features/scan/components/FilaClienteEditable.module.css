@@ -1,0 +1,111 @@
+.fila {
+  background-color: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radius-md);
+  margin: 0 var(--espacio-4) var(--espacio-3);
+}
+
+.resumen {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espacio-2);
+  padding: var(--espacio-3) var(--espacio-4);
+  cursor: pointer;
+  list-style: none;
+}
+
+.resumen::-webkit-details-marker {
+  display: none;
+}
+
+.codigoResumen {
+  color: var(--color-texto-tenue);
+  font-size: 0.85rem;
+}
+
+.marcaAdvertencia {
+  flex-shrink: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--nivel-regular);
+  background-color: var(--nivel-regular-fondo);
+  padding: 3px 8px;
+  border-radius: 999px;
+}
+
+.campos {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--espacio-3);
+  padding: 0 var(--espacio-4) var(--espacio-4);
+}
+
+@media (min-width: 480px) {
+  .campos {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.etiquetaCampo {
+  font-size: 0.78rem;
+  color: var(--color-texto-tenue);
+}
+
+.campo input {
+  padding: 10px 12px;
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-fondo);
+  font-size: 0.95rem;
+}
+
+.campo input:focus-visible {
+  border-color: var(--color-primario);
+}
+
+.bloqueEquipos {
+  padding: 0 var(--espacio-4) var(--espacio-4);
+  border-top: 1px solid var(--color-borde);
+  padding-top: var(--espacio-3);
+}
+
+.textoCrudo {
+  padding: 0 var(--espacio-4) var(--espacio-3);
+}
+
+.textoCrudo summary {
+  font-size: 0.78rem;
+  color: var(--color-primario);
+  cursor: pointer;
+}
+
+.pre {
+  margin-top: var(--espacio-2);
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-size: 0.72rem;
+  background-color: var(--color-fondo);
+  padding: var(--espacio-2);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.eliminar {
+  width: 100%;
+  padding: var(--espacio-3);
+  background: transparent;
+  border: none;
+  border-top: 1px solid var(--color-borde);
+  color: var(--nivel-malo);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
