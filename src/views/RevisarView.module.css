@@ -12,6 +12,54 @@
   color: var(--color-texto-tenue);
 }
 
+.error {
+  color: var(--nivel-malo);
+}
+
+.progreso {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-2);
+  margin: 0 var(--espacio-4) var(--espacio-3);
+  padding: var(--espacio-3);
+  background-color: var(--color-primario-tenue);
+  color: var(--color-primario-fuerte);
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+}
+
+.spinnerChico {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--color-borde);
+  border-top-color: var(--color-primario);
+  border-radius: 50%;
+  animation: girarChico 0.7s linear infinite;
+}
+
+@keyframes girarChico {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.avisoErrorParcial {
+  margin: 0 var(--espacio-4) var(--espacio-3);
+  padding: var(--espacio-3);
+  background-color: var(--nivel-malo-fondo);
+  color: var(--nivel-malo);
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+}
+
+.esperandoPrimeraPagina {
+  text-align: center;
+  padding: var(--espacio-5) var(--espacio-4);
+  color: var(--color-texto-tenue);
+  font-size: 0.88rem;
+}
+
 .avisoGeneral {
   margin: 0 var(--espacio-4) var(--espacio-3);
   padding: var(--espacio-3);

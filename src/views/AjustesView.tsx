@@ -7,6 +7,12 @@ import { getOcrServiceUrl, setOcrServiceUrl } from '../features/scan/api/config'
 import { verificarSalud } from '../features/scan/api/ocrClient';
 import { getTodosLosClientes, exportarRespaldo, importarRespaldo } from '../db/database';
 import { clientesACsv, descargarArchivo } from '../utils/exportar';
+import {
+  soportaNotificaciones,
+  pedirPermisoNotificaciones,
+  mostrarNotificacion,
+} from '../utils/notificaciones';
+import { usePersistedState } from '../shared/hooks/usePersistedState';
 import type { CriterioSalud } from '../types/dominio';
 import styles from './AjustesView.module.css';
 
@@ -18,6 +24,13 @@ export function AjustesView() {
   const [estadoConexion, setEstadoConexion] = useState<EstadoConexion>('sin_probar');
   const inputImportar = useRef<HTMLInputElement>(null);
   const [mensajeImportar, setMensajeImportar] = useState<string | null>(null);
+  const [notificacionesActivadas, setNotificacionesActivadas] = usePersistedState(
+    'helanorte:notificaciones_activadas',
+    true
+  );
+  const [permisoNotificacion, setPermisoNotificacion] = useState<NotificationPermission | 'no_soportado'>(
+    soportaNotificaciones() ? Notification.permission : 'no_soportado'
+  );
 
   useEffect(() => {
     setEstadoConexion('sin_probar');
@@ -40,6 +53,26 @@ export function AjustesView() {
     await actualizarConfig({
       ...config,
       cuotaGeneralPorMaquina: Number.isNaN(monto) || monto < 0 ? 0 : monto,
+    });
+  }
+
+  async function activarNotificaciones(activar: boolean) {
+    setNotificacionesActivadas(activar);
+    if (activar) {
+      const resultado = await pedirPermisoNotificaciones();
+      setPermisoNotificacion(resultado);
+    }
+  }
+
+  async function probarNotificacion() {
+    if (Notification.permission !== 'granted') {
+      const resultado = await pedirPermisoNotificaciones();
+      setPermisoNotificacion(resultado);
+      if (resultado !== 'granted') return;
+    }
+    await mostrarNotificacion('Así se ve una notificación de HelaNorte', {
+      body: 'Si ves esto, quedaron bien configuradas.',
+      tag: 'helanorte-prueba',
     });
   }
 
@@ -120,6 +153,45 @@ export function AjustesView() {
           defaultValue={config.cuotaGeneralPorMaquina || ''}
           onBlur={(e) => actualizarCuotaGeneral(e.target.value)}
         />
+      </section>
+
+      <section className={styles.seccion}>
+        <h2 className={styles.tituloSeccion}>Notificaciones</h2>
+        <p className={styles.ayuda}>
+          Avisa con una notificación del celular/navegador cuando termine de procesar un
+          escaneo — útil si bloqueas la pantalla o cambias de app mientras espera. Si la
+          tienes abierta mirando, no te interrumpe con una notificación de más.
+        </p>
+
+        {permisoNotificacion === 'no_soportado' && (
+          <p className={styles.ayuda}>Este navegador no admite notificaciones.</p>
+        )}
+
+        {permisoNotificacion !== 'no_soportado' && (
+          <>
+            <label className={styles.filaCheckbox}>
+              <input
+                type="checkbox"
+                checked={notificacionesActivadas}
+                onChange={(e) => activarNotificaciones(e.target.checked)}
+              />
+              Notificarme cuando termine un escaneo
+            </label>
+
+            {permisoNotificacion === 'denied' && (
+              <p className={`${styles.estado} ${styles.error}`}>
+                ✕ Bloqueaste las notificaciones para este sitio. Actívalas desde los ajustes
+                del navegador (ícono de candado junto a la URL) si quieres recibirlas.
+              </p>
+            )}
+
+            {notificacionesActivadas && permisoNotificacion === 'granted' && (
+              <Boton variante="secundario" onClick={probarNotificacion}>
+                Probar notificación
+              </Boton>
+            )}
+          </>
+        )}
       </section>
 
       <section className={styles.seccion}>

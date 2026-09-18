@@ -1,45 +1,34 @@
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { EncabezadoVista } from '../shared/components/EncabezadoVista';
-import { Cargando } from '../shared/components/Cargando';
 import { CapturaArchivo } from '../features/scan/components/CapturaArchivo';
-import { extraerDatos, OcrServiceError } from '../features/scan/api/ocrClient';
-import styles from './EscanearView.module.css';
-
-const MENSAJES_CARGA = [
-  'Enviando el archivo al servicio de OCR…',
-  'Leyendo el texto de la hoja…',
-  'Interpretando clientes y montos…',
-];
+import { CapturaJson } from '../features/scan/components/CapturaJson';
+import { iniciarEscaneo, cargarResultadoDirecto } from '../features/scan/scanManager';
+import { pedirPermisoNotificaciones, notificacionesPreferidas } from '../utils/notificaciones';
 
 export function EscanearView() {
   const navigate = useNavigate();
-  const [cargando, setCargando] = useState(false);
-  const [mensajeCarga, setMensajeCarga] = useState(MENSAJES_CARGA[0]);
-  const [error, setError] = useState<string | null>(null);
 
-  async function manejarArchivo(archivo: File) {
-    setError(null);
-    setCargando(true);
-    let indice = 0;
-    const intervalo = setInterval(() => {
-      indice = (indice + 1) % MENSAJES_CARGA.length;
-      setMensajeCarga(MENSAJES_CARGA[indice]);
-    }, 2500);
-
-    try {
-      const resultado = await extraerDatos(archivo);
-      navigate('/revisar', { state: { resultado, nombreArchivo: archivo.name } });
-    } catch (err) {
-      const mensaje =
-        err instanceof OcrServiceError
-          ? err.message
-          : 'Ocurrió un error inesperado al procesar el archivo.';
-      setError(mensaje);
-    } finally {
-      clearInterval(intervalo);
-      setCargando(false);
+  function manejarArchivo(archivo: File) {
+    // Se pide el permiso de notificaciones AQUÍ, dentro de la propia
+    // acción del usuario (elegir el archivo) — es el momento en que más
+    // navegadores permiten mostrar el diálogo sin bloquearlo. Si el
+    // usuario ya respondió antes (sí o no), esto no vuelve a preguntar.
+    if (notificacionesPreferidas()) {
+      pedirPermisoNotificaciones();
     }
+    // Arranca en segundo plano y navega de inmediato: la pantalla de
+    // Revisión es la que muestra el progreso página por página, así el
+    // usuario nunca ve una pantalla "congelada" esperando.
+    iniciarEscaneo(archivo);
+    navigate('/revisar');
+  }
+
+  function manejarJsonCargado(
+    resultado: Parameters<typeof cargarResultadoDirecto>[0],
+    nombreArchivo: string
+  ) {
+    cargarResultadoDirecto(resultado, nombreArchivo);
+    navigate('/revisar');
   }
 
   return (
@@ -49,14 +38,8 @@ export function EscanearView() {
         subtitulo="Foto de la hoja o sube el PDF/imagen del reporte de visita"
       />
 
-      {cargando ? (
-        <Cargando mensaje={mensajeCarga} />
-      ) : (
-        <>
-          {error && <p className={styles.error}>{error}</p>}
-          <CapturaArchivo onArchivoSeleccionado={manejarArchivo} />
-        </>
-      )}
+      <CapturaArchivo onArchivoSeleccionado={manejarArchivo} />
+      <CapturaJson onCargado={manejarJsonCargado} />
     </div>
   );
 }
