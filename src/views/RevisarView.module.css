@@ -53,6 +53,15 @@
   font-size: 0.85rem;
 }
 
+.avisoInterrumpido {
+  margin: 0 var(--espacio-4) var(--espacio-3);
+  padding: var(--espacio-3);
+  background-color: var(--nivel-regular-fondo);
+  color: var(--nivel-regular);
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+}
+
 .esperandoPrimeraPagina {
   text-align: center;
   padding: var(--espacio-5) var(--espacio-4);

@@ -109,6 +109,12 @@
   width: 100%;
 }
 
+.infoEscaneo {
+  margin-top: var(--espacio-2);
+  font-size: 0.75rem;
+  color: var(--color-texto-tenue);
+}
+
 .tarjetaInfo {
   display: flex;
   flex-direction: column;

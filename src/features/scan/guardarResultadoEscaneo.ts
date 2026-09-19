@@ -7,6 +7,7 @@ export async function guardarResultadoEscaneo(params: {
   clientes: Cliente[];
   nombreArchivo: string;
   metodoExtraccion: string;
+  paginasProcesadas: number;
 }): Promise<Escaneo> {
   const ahora = new Date().toISOString();
   const escaneo: Escaneo = {
@@ -15,6 +16,7 @@ export async function guardarResultadoEscaneo(params: {
     encabezado: params.encabezado,
     nombre_archivo: params.nombreArchivo,
     metodo_extraccion: params.metodoExtraccion,
+    paginas_procesadas: params.paginasProcesadas,
   };
 
   const clientesGuardados: ClienteGuardado[] = params.clientes

@@ -1,16 +1,11 @@
 import { useRef, useState } from 'react';
 import type { OcrExtractResponse } from '../../../types/ocr';
+import { Boton } from '../../../shared/components/Boton';
+import { parsearResultadoExterno, FormatoInvalidoError } from '../parseResultadoExterno';
 import styles from './CapturaJson.module.css';
 
 interface CapturaJsonProps {
   onCargado: (resultado: OcrExtractResponse, nombreArchivo: string) => void;
-}
-
-/** Chequeo mínimo de forma: no valida cada campo, solo que "parezca" el JSON esperado. */
-function pareceResultadoValido(valor: unknown): valor is Record<string, unknown> {
-  if (!valor || typeof valor !== 'object') return false;
-  const v = valor as Record<string, unknown>;
-  return typeof v.encabezado === 'object' && v.encabezado !== null && Array.isArray(v.clientes);
 }
 
 export function CapturaJson({ onCargado }: CapturaJsonProps) {
@@ -25,46 +20,22 @@ export function CapturaJson({ onCargado }: CapturaJsonProps) {
     setError(null);
     try {
       const texto = await archivo.text();
-      const json: unknown = JSON.parse(texto);
-
-      if (!pareceResultadoValido(json)) {
-        setError(
-          'El archivo no tiene la forma esperada (falta "encabezado" o "clientes"). ' +
-            'Revisa que sea el JSON con la estructura del microservicio de OCR.'
-        );
-        return;
-      }
-
-      // Se acepta con flexibilidad: si al cliente le falta algún campo (ej.
-      // "equipos" porque el otro OCR no lo produce), se rellena con un
-      // valor por defecto en vez de rechazar todo el archivo.
-      const clientesCrudos = json.clientes as Array<Record<string, unknown>>;
-      const resultado: OcrExtractResponse = {
-        encabezado: json.encabezado as OcrExtractResponse['encabezado'],
-        clientes: clientesCrudos.map((c) => ({
-          equipos: [],
-          ...c,
-        })) as unknown as OcrExtractResponse['clientes'],
-        paginas_procesadas: (json.paginas_procesadas as number) ?? 1,
-        metodo_extraccion: (json.metodo_extraccion as string) ?? 'externo',
-        advertencias: Array.isArray(json.advertencias) ? (json.advertencias as string[]) : [],
-      };
-
+      const resultado = parsearResultadoExterno(texto);
       onCargado(resultado, archivo.name);
-    } catch {
-      setError('No se pudo leer ese archivo como JSON válido.');
+    } catch (err) {
+      setError(err instanceof FormatoInvalidoError ? err.message : 'No se pudo leer ese archivo.');
     }
   }
 
   return (
     <div className={styles.contenedor}>
-      <button type="button" className={styles.boton} onClick={() => inputRef.current?.click()}>
-        Cargar un JSON ya estructurado (de otro OCR)
-      </button>
+      <Boton variante="secundario" onClick={() => inputRef.current?.click()}>
+        Cargar archivo JSON o JS (de otro OCR)
+      </Boton>
       <input
         ref={inputRef}
         type="file"
-        accept="application/json,.json"
+        accept="application/json,.json,.js,text/plain,.txt"
         className={styles.inputOculto}
         onChange={manejarArchivo}
       />

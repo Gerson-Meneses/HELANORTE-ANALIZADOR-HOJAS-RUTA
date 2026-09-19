@@ -7,6 +7,9 @@ export interface EstadoEscaneo {
   activo: boolean; // true mientras haya algo cargado/cargándose para revisar
   procesando: boolean;
   completado: boolean;
+  /** true si se recuperó un escaneo que se cortó a mitad de camino (ej. el
+   * navegador recargó la página por falta de memoria mientras procesaba). */
+  interrumpido: boolean;
   error: string | null;
   paginaActual: number;
   totalPaginas: number;
@@ -22,6 +25,7 @@ function estadoVacio(): EstadoEscaneo {
     activo: false,
     procesando: false,
     completado: false,
+    interrumpido: false,
     error: null,
     paginaActual: 0,
     totalPaginas: 0,
@@ -33,14 +37,51 @@ function estadoVacio(): EstadoEscaneo {
   };
 }
 
+const CLAVE_SESSION = 'helanorte:escaneo_en_progreso';
+
+/**
+ * Guarda el estado en sessionStorage en cada cambio. Esto es lo que
+ * permite recuperar el progreso si el navegador recarga la página a la
+ * fuerza (ej. Android mata la pestaña en segundo plano por falta de
+ * memoria mientras se usa la cámara) — sin esto, esa recarga perdía TODO
+ * el escaneo en curso sin dejar rastro.
+ */
+function guardarEnSession(e: EstadoEscaneo): void {
+  try {
+    sessionStorage.setItem(CLAVE_SESSION, JSON.stringify(e));
+  } catch {
+    /* sessionStorage puede fallar en modo incógnito estricto; no es crítico */
+  }
+}
+
+function leerDeSession(): EstadoEscaneo {
+  try {
+    const guardado = sessionStorage.getItem(CLAVE_SESSION);
+    if (!guardado) return estadoVacio();
+    const datos = JSON.parse(guardado) as EstadoEscaneo;
+    if (datos.procesando) {
+      // Si quedó marcado como "procesando", es porque la recarga pasó a
+      // mitad de camino: lo que estaba corriendo en memoria ya no existe,
+      // así que se marca como interrumpido en vez de "procesando" para
+      // siempre (lo que congelaría la pantalla de Revisión).
+      datos.procesando = false;
+      datos.interrumpido = datos.activo && !datos.completado;
+    }
+    return datos;
+  } catch {
+    return estadoVacio();
+  }
+}
+
 type Escucha = (estado: EstadoEscaneo) => void;
 
-let estado: EstadoEscaneo = estadoVacio();
+let estado: EstadoEscaneo = leerDeSession();
 const escuchas = new Set<Escucha>();
 
 function notificar() {
   // Nueva referencia de objeto siempre, para que React detecte el cambio.
   estado = { ...estado };
+  guardarEnSession(estado);
   escuchas.forEach((fn) => fn(estado));
 }
 
@@ -58,6 +99,11 @@ export function obtenerEstadoEscaneo(): EstadoEscaneo {
 
 export function limpiarEscaneo(): void {
   estado = estadoVacio();
+  try {
+    sessionStorage.removeItem(CLAVE_SESSION);
+  } catch {
+    /* no crítico */
+  }
   notificar();
 }
 
@@ -167,6 +213,7 @@ export function cargarResultadoDirecto(
     activo: true,
     procesando: false,
     completado: true,
+    interrumpido: false,
     error: null,
     paginaActual: resultado.paginas_procesadas || 1,
     totalPaginas: resultado.paginas_procesadas || 1,

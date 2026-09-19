@@ -284,6 +284,10 @@ export function ClienteDetalleView() {
             <>
               <dl className={styles.datos}>
                 <div>
+                  <dt>Sec.</dt>
+                  <dd>{cliente.sec ?? '—'}</dd>
+                </div>
+                <div>
                   <dt>Categoría</dt>
                   <dd>{cliente.ctg ?? '—'}</dd>
                 </div>
@@ -391,6 +395,10 @@ export function ClienteDetalleView() {
               encabezado={escaneoActual.encabezado}
               onCambiar={cambiarEncabezadoBorrador}
             />
+            <p className={styles.infoEscaneo}>
+              Procesado con: {escaneoActual.metodo_extraccion} · {escaneoActual.paginas_procesadas}{' '}
+              página(s) · {formatearFechaCorta(escaneoActual.fecha_procesado)}
+            </p>
             <Boton
               variante="secundario"
               onClick={guardarEncabezado}

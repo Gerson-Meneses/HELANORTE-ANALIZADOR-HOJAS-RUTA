@@ -5,7 +5,7 @@ import { InsigniaSalud, colorDeNivel } from '../../../shared/components/Insignia
 import { formatearMoneda, diasDesde } from '../../../utils/formato';
 import styles from './TarjetaCliente.module.css';
 
-export function TarjetaCliente({ cliente, salud }: ClienteConSalud) {
+export function TarjetaCliente({ cliente, salud, pctCuota }: ClienteConSalud) {
   const dias = diasDesde(cliente.ucm_fecha);
 
   return (
@@ -28,6 +28,12 @@ export function TarjetaCliente({ cliente, salud }: ClienteConSalud) {
             <span className={styles.etiquetaDato}>Última compra</span>
             <span>{dias == null ? '—' : `hace ${dias} día${dias === 1 ? '' : 's'}`}</span>
           </div>
+          {pctCuota != null && (
+            <div>
+              <span className={styles.etiquetaDato}>% de cuota</span>
+              <span className="num">{Math.round(pctCuota)}%</span>
+            </div>
+          )}
         </div>
 
         {cliente.negocio && <p className={styles.negocio}>{cliente.negocio}</p>}

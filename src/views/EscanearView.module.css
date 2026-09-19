@@ -1,8 +1,6 @@
-.error {
-  margin: 0 var(--espacio-4) var(--espacio-3);
-  padding: var(--espacio-3);
-  background-color: var(--nivel-malo-fondo);
-  color: var(--nivel-malo);
-  border-radius: var(--radius-md);
-  font-size: 0.9rem;
+.opciones {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-3);
+  padding: 0 var(--espacio-4) var(--espacio-4);
 }

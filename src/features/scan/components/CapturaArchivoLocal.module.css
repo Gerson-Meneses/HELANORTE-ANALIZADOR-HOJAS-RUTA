@@ -9,9 +9,3 @@
 .inputOculto {
   display: none;
 }
-
-.error {
-  margin-top: var(--espacio-2);
-  font-size: 0.8rem;
-  color: var(--nivel-malo);
-}

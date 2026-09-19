@@ -1,9 +1,13 @@
 import { useNavigate } from 'react-router-dom';
 import { EncabezadoVista } from '../shared/components/EncabezadoVista';
-import { CapturaArchivo } from '../features/scan/components/CapturaArchivo';
 import { CapturaJson } from '../features/scan/components/CapturaJson';
+import { PegarTexto } from '../features/scan/components/PegarTexto';
+import { CapturaArchivoLocal } from '../features/scan/components/CapturaArchivoLocal';
+import { CapturaCamara } from '../features/scan/components/CapturaCamara';
 import { iniciarEscaneo, cargarResultadoDirecto } from '../features/scan/scanManager';
 import { pedirPermisoNotificaciones, notificacionesPreferidas } from '../utils/notificaciones';
+import type { OcrExtractResponse } from '../types/ocr';
+import styles from './EscanearView.module.css';
 
 export function EscanearView() {
   const navigate = useNavigate();
@@ -23,10 +27,7 @@ export function EscanearView() {
     navigate('/revisar');
   }
 
-  function manejarJsonCargado(
-    resultado: Parameters<typeof cargarResultadoDirecto>[0],
-    nombreArchivo: string
-  ) {
+  function manejarResultadoDirecto(resultado: OcrExtractResponse, nombreArchivo: string) {
     cargarResultadoDirecto(resultado, nombreArchivo);
     navigate('/revisar');
   }
@@ -35,11 +36,15 @@ export function EscanearView() {
     <div>
       <EncabezadoVista
         titulo="Escanear reporte"
-        subtitulo="Foto de la hoja o sube el PDF/imagen del reporte de visita"
+        subtitulo="Elige cómo quieres cargar los datos — todas las opciones son igual de válidas"
       />
 
-      <CapturaArchivo onArchivoSeleccionado={manejarArchivo} />
-      <CapturaJson onCargado={manejarJsonCargado} />
+      <div className={styles.opciones}>
+        <CapturaJson onCargado={manejarResultadoDirecto} />
+        <PegarTexto onCargado={manejarResultadoDirecto} />
+        <CapturaArchivoLocal onArchivoSeleccionado={manejarArchivo} />
+        <CapturaCamara onArchivoSeleccionado={manejarArchivo} />
+      </div>
     </div>
   );
 }

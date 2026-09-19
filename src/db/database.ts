@@ -86,6 +86,25 @@ export async function eliminarCliente(id: string): Promise<void> {
   await db.delete('clientes', id);
 }
 
+/**
+ * Borra TODO: clientes, escaneos, historial, cuotas y configuración
+ * (reglas de salud, overrides por cliente). No borra preferencias de
+ * localStorage (tema, URL del OCR, filtros) — esas se limpian aparte si
+ * hace falta. Usar con cuidado: no se puede deshacer.
+ */
+export async function borrarTodosLosDatos(): Promise<void> {
+  const db = await getDB();
+  const tx = db.transaction(['clientes', 'escaneos', 'historial', 'cuotas', 'config'], 'readwrite');
+  await Promise.all([
+    tx.objectStore('clientes').clear(),
+    tx.objectStore('escaneos').clear(),
+    tx.objectStore('historial').clear(),
+    tx.objectStore('cuotas').clear(),
+    tx.objectStore('config').clear(),
+    tx.done,
+  ]);
+}
+
 /* ------------------------------------------------------------------ */
 /* Escaneos                                                             */
 /* ------------------------------------------------------------------ */

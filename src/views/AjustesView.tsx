@@ -5,7 +5,7 @@ import { useClientesConSalud } from '../features/clients/useClientesConSalud';
 import { EditorCriterioSalud } from '../features/clients/components/EditorCriterioSalud';
 import { getOcrServiceUrl, setOcrServiceUrl } from '../features/scan/api/config';
 import { verificarSalud } from '../features/scan/api/ocrClient';
-import { getTodosLosClientes, exportarRespaldo, importarRespaldo } from '../db/database';
+import { getTodosLosClientes, exportarRespaldo, importarRespaldo, borrarTodosLosDatos } from '../db/database';
 import { clientesACsv, descargarArchivo } from '../utils/exportar';
 import {
   soportaNotificaciones,
@@ -103,6 +103,31 @@ export function AjustesView() {
     } catch {
       setMensajeImportar('No se pudo leer ese archivo como respaldo válido.');
     }
+  }
+
+  async function borrarTodo() {
+    const primeraConfirmacion = window.confirm(
+      '¿Borrar TODOS los datos? Esto elimina todos los clientes, escaneos, historial, cuotas ' +
+        'y ajustes guardados en este dispositivo. No se puede deshacer.\n\n' +
+        'Si quieres conservar algo, cancela y usa primero "Descargar respaldo completo".'
+    );
+    if (!primeraConfirmacion) return;
+
+    const segundaConfirmacion = window.confirm(
+      'Última confirmación: esto borra todo de verdad. ¿Seguro que quieres continuar?'
+    );
+    if (!segundaConfirmacion) return;
+
+    await borrarTodosLosDatos();
+
+    // También se limpian las preferencias guardadas en este navegador
+    // (tema, filtros, URL del OCR, etc.) para que quede un reinicio total.
+    Object.keys(localStorage)
+      .filter((clave) => clave.startsWith('helanorte:'))
+      .forEach((clave) => localStorage.removeItem(clave));
+    sessionStorage.clear();
+
+    window.location.href = '/escanear';
   }
 
   return (
@@ -234,6 +259,10 @@ export function AjustesView() {
           Todo se guarda solo en este dispositivo/navegador. Si cambias de celular o borras
           los datos del navegador, usa el respaldo para no perder tu historial.
         </p>
+
+        <Boton variante="peligro" onClick={borrarTodo} className={styles.botonBorrarTodo}>
+          Borrar todos los datos
+        </Boton>
       </section>
     </div>
   );

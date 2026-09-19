@@ -98,6 +98,7 @@ export function RevisarView() {
         clientes,
         nombreArchivo: progreso.nombreArchivo,
         metodoExtraccion: progreso.metodoExtraccion,
+        paginasProcesadas: progreso.totalPaginas || 1,
       });
       limpiarEscaneo();
       navigate('/');
@@ -130,6 +131,15 @@ export function RevisarView() {
         titulo="Revisar antes de guardar"
         subtitulo={`${clientes.length} cliente(s) encontrados hasta ahora`}
       />
+
+      {progreso.interrumpido && (
+        <div className={styles.avisoInterrumpido}>
+          <strong>El escaneo se interrumpió antes de terminar</strong> — probablemente el
+          navegador se quedó sin memoria y recargó la página (pasa seguido al usar la cámara
+          en Android). Esto es lo que se alcanzó a procesar; revísalo y guárdalo, y si faltan
+          páginas puedes escanearlas aparte.
+        </div>
+      )}
 
       {progreso.procesando && (
         <div className={styles.progreso}>

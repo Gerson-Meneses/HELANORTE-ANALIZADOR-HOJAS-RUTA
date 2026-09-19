@@ -70,3 +70,8 @@
   font-size: 0.78rem;
   color: var(--color-texto-tenue);
 }
+
+.botonBorrarTodo {
+  margin-top: var(--espacio-4);
+  width: 100%;
+}

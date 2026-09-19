@@ -1,0 +1,39 @@
+.contenedorBoton {
+  width: 100%;
+}
+
+.contenedorBoton > button {
+  width: 100%;
+}
+
+.contenedor {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-2);
+}
+
+.textarea {
+  width: 100%;
+  padding: var(--espacio-3);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radius-md);
+  background-color: var(--color-superficie);
+  color: var(--color-texto);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  resize: vertical;
+}
+
+.error {
+  font-size: 0.8rem;
+  color: var(--nivel-malo);
+}
+
+.acciones {
+  display: flex;
+  gap: var(--espacio-2);
+}
+
+.acciones > * {
+  flex: 1;
+}

@@ -1,5 +1,5 @@
 const CLAVE_STORAGE = 'helanorte:ocr_url';
-const URL_POR_DEFECTO = 'http://127.0.0.1:8001';
+const URL_POR_DEFECTO = 'https://ocr-service-1fvx.onrender.com';
 
 export function getOcrServiceUrl(): string {
   return localStorage.getItem(CLAVE_STORAGE) ?? URL_POR_DEFECTO;

@@ -7,6 +7,7 @@ export interface Escaneo {
   encabezado: Encabezado;
   nombre_archivo: string;
   metodo_extraccion: string;
+  paginas_procesadas: number;
 }
 
 /**
